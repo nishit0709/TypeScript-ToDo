@@ -1,103 +1,115 @@
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 600px;
-    align-items: flex-start;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 10px;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  align-items: flex-start;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
 }
 
-.create-todo{
-    border-right: 2px solid black;
-    justify-content: center;
-    width: 50%;
-    padding: 10px;
-    background-color: rgb(125, 245, 125);
-    border-radius: 10px 0 0 10px
+.create-todo {
+  border-right: 2px solid black;
+  justify-content: center;
+  width: 50%;
+  padding: 10px;
+  background-color: rgb(125, 245, 125);
+  border-radius: 10px 0 0 10px;
 }
 
-.create-todo div{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.create-todo form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.create-todo label{
-    font-size: 0.8em;
-    font-weight: 600;
+.create-todo label {
+  font-size: 0.8em;
+  font-weight: 600;
 }
 
-.create-todo input{
-    width: 20em;
-    border-radius: 10px;
-    border: none;
-    height: 20px;
-    margin-top: 5px;
+.create-todo input {
+  width: 20em;
+  border-radius: 10px;
+  border: none;
+  height: 20px;
+  margin-top: 5px;
 }
 
-.create-todo select{
-    width: 20.5em ;
+.create-todo select {
+  width: 20.5em;
 }
 
-#submit{
-    border-radius: 10px;
-    margin-left: 90px;
-    background-color: orange;
-    height: 30px;
-    cursor: pointer;
+.btnSubmit {
+  display: flex;
+  justify-content: space-evenly;
 }
 
-.view-todo{
-    width: 50%;
-    height: auto;
-    padding: 10px;
+.btnSubmit button {
+  background-color: orange;
+  height: 30px;
+  cursor: pointer;
+  border: none;
+  border-radius: 20px;
+  width: 5vw;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.todo-list{
-    height: 210px;
-    overflow-y: scroll;
+.btnSubmit button:hover {
+  scale: 1.1;
 }
 
-.list-item{
-    display: grid;
-    grid-template-columns: auto 35px 18px;
-    grid-template-rows: 20px auto;
-    margin-top: 10px;
-    border-radius: 10px;
-    padding: 5px;
-    background-color:antiquewhite;
-    cursor: pointer;
+.view-todo {
+  width: 50%;
+  height: auto;
+  padding: 10px;
+}
+
+.todo-list {
+  height: 210px;
+  overflow-y: scroll;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: auto 35px 18px;
+  grid-template-rows: 20px auto;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: antiquewhite;
+  cursor: pointer;
 }
 
 .list-item select {
-    border-radius: 10px;
+  border-radius: 10px;
 }
 
-#title{
-    font-weight: 700;
+#title {
+  font-weight: 700;
 }
 
-#status{
-    font-size: 0.7em;
-    border-radius: 5px;
-    width: fit-content;
-    padding-top: 2px;
-    background-color: white;
+#status {
+  font-size: 0.7em;
+  border-radius: 5px;
+  width: fit-content;
+  padding-top: 2px;
+  background-color: white;
 }
 
-.list-item p{
-    grid-column-start: 1;
-    grid-column-end: 3;
-    font-size: 0.7em;
+.list-item p {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  font-size: 0.7em;
 }
 
-.list-item button{
-    padding: 1px 0 0 0;
+.list-item button {
+  padding: 1px 0 0 0;
 }
 
-.list-item img{
-    width: auto;
-    height: 10px;
-    margin-left: 0;
+.list-item img {
+  width: auto;
+  height: 10px;
+  margin-left: 0;
 }
