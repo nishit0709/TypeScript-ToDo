@@ -9,9 +9,8 @@ type todoData = {
 };
 
 const ListItem = (props: any) => {
-  console.log(props);
   return (
-    <div className="list-item" onClick={() => props.handleUpdate(props.taskID)}>
+    <div className="list-item" onClick={() => props.editTodo(props.taskID)}>
       <span id="title">{props.data.name}</span>
       <span id="status">{props.data.status}</span>
       <button
@@ -34,7 +33,7 @@ const Todo = () => {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [status, setStatus] = useState<string>("");
-
+ 
   function handleSubmit(e: any) {
     e.preventDefault();
     const data: todoData = {
@@ -43,34 +42,35 @@ const Todo = () => {
       status
     };
     if (todo.length === id) {
+      // Add a todo to the list
       setTodo([...todo, data]);
+      setId(id + 1)
     } else {
+      // Update a todo from the list
       setTodo([...todo.slice(0, id), data, ...todo.slice(id + 1)]);
+      setId(todo.length)
     }
 
-    setId(todo.length);
     setName("");
     setDescription("");
     setStatus("");
-    
-    console.log(`data is: ${JSON.stringify(data)}`)
-    console.log(`todos: ${todo}`)
-    console.log(`todo length: ${todo.length}`)
-    console.log(`id is: ${id}`)
   }
 
-  function handleUpdate(taskID: number) {
+  // Returns ID of the element to be updated
+  function editTodo(taskID: number) {
     setId(taskID);
     setName(todo[taskID].name);
     setDescription(todo[taskID].description);
     setStatus(todo[taskID].status);
   }
 
+  // Deletes the element based on the ID
   function handleDelete(taskID: number) {
     setTodo([...todo.slice(0, taskID), ...todo.slice(taskID + 1)]);
-    setId(todo.length);
+    setId(todo.length - 1);
   }
 
+  // Used to reset form and set 'id' to default value
   function resetData(){
     setId(todo.length);
     setName("");
@@ -126,7 +126,7 @@ const Todo = () => {
             <br />
             
             <div className="btnSubmit">
-                <button type="submit" onClick={() => console.log(todo.length + ', ' + id)}>
+                <button type="submit">
                     {todo.length === id ? "Add" : "Update"}
                 </button>
                 <button onClick={resetData}>Reset</button>
@@ -141,7 +141,7 @@ const Todo = () => {
               key={index}
               taskID={index}
               data={task}
-              handleUpdate={handleUpdate}
+              editTodo={editTodo}
               handleDelete={handleDelete}
             />
           ))}
