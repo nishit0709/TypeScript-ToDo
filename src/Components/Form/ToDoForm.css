@@ -1,0 +1,27 @@
+
+.formContainer {
+    /* border: 2px solid blue; */
+    width: 50%;
+    border-radius: 5px;
+    /* background-color: #f2f2f2; */
+    width: 100%;
+    height: auto;
+    padding: 2rem;
+  }
+  button:hover {
+    background-color: lightgrey;
+  }
+  .inputForm {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+  }
+  .inputBtn {
+    background-color: grey;
+    color: white;
+  }
+  
