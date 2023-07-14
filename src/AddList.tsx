@@ -69,11 +69,6 @@ const EditButton = styled.button`
 const TodoItemContainer = styled.li`
   margin-block: 10px 20px;
   writing-mode: horizontal-tb;
-  
-  /* margin: 1.5em auto; */
-  /* margin: 10px 3px 15px 5px; */
-  /* margin-bottom: 20px; */
-  /* margin: auto; */
 `;
 
 const TodoList: React.FC = () => {
