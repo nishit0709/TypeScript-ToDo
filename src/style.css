@@ -1,0 +1,30 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.App {
+  display: flex;
+  font-family: sans-serif;
+  border-radius: 1rem;
+  box-shadow: 10px 5px 15px grey;
+  /* border: 10px solid red; */
+}
+.LeftContainer {
+  /* border: 10px solid green; */
+  width: 50%;
+  height: 25rem;
+}
+.RightContainer {
+  /* border: 10px solid blue; */
+  width: 50%;
+  height: 25rem;
+  color: white;
+  /* overflow: hidden; */
+}
