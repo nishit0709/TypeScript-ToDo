@@ -1,36 +1,35 @@
+import {Task} from "./taskInterface";
 interface Props {
-    tasks: Array<any>;
-    grabTitle(params: any): void;
-    grabTask(params: any): void;
+    tasks: Array<Task>;
     grabID(params:any):void;
-  }
-  export default function TaskList(props: Props) {
-    return (
-      <>
-        <ul className="taskList">
-          {props.tasks.map((t) => {
-            return (
-              <div
-                className="something"
-                onClick={() => {
-                  props.grabTitle(t.title);
-                  props.grabTask(t.task);
-                  props.grabID(t.id);
-                }}
-                key={t.title}
-              >
-                <div className="taskListElement">
-                  <div>
-                    <b>{t.title}</b>
-                  </div>
-                  <div>{t.task}</div>
+    grabTask(params:any):void;
+}
+export default function TaskList(props: Props) {
+  return (
+    <div>
+      <ul className="taskList">
+        {props.tasks.map((t) => {
+          return (
+            <div
+              className="something"
+              onClick={() => {
+                props.grabID(t.id);
+                props.grabTask(t);
+              }}
+              key={t.title}
+            >
+              <div className="taskListElement">
+                <div>
+                  <b>{t.title}</b>
                 </div>
-                <div className="taskListStatus">{t.status}</div>
+                <div>{t.task}</div>
               </div>
-            );
-          })}
-        </ul>
-      </>
-    );
-  }
+              <div className="taskListStatus">{t.status}</div>
+            </div>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
   

@@ -1,89 +1,84 @@
-import { useState } from "react";
+import { useState,useRef } from "react";
 import TaskList from "./TaskList";
-
-let id_count: number = 0;
-
-enum Status {
-  TODO = "To-do",
-  DOING = "Doing",
-  DONE = "Done"
-}
-
-interface Task {
-  id: number;
-  title: string;
-  task: string;
-  status: Status;
-}
+import {Status, Task} from "./taskInterface";
 
 export default function TaskForm() {
-  const [currentID, setCurrentID] = useState();  
-  const [title, setTitle] = useState("");
-  const [task, setTask] = useState("");
-  const [progress, setProgress] = useState<Status|any>(Status.TODO);
+
+  let id_count = useRef<number>(0);
+  let taskInit = {
+    id:id_count.current,
+    title:"",
+    task:"",
+    status:Status.TODO
+  }
+  
+  const [currentTask, setCurrentTask] = useState<Task>(taskInit);
+  const [currentID, setCurrentID] = useState<Number>();  
   const [taskList, setTaskList] = useState<Task[]>([]);
-  let f = false;
-  const handleClick = () => {
-    setTitle("");
-    setTask("");
-    f = false;
-    if (taskList.length === 0) {
-      setTaskList([
-        ...taskList,
-        { id: ++id_count, title: title, task: task, status: progress }
-      ]);
-    } else {
-      taskList.forEach(function (arrayItem) {
-        if (arrayItem.id === currentID) {
-          f = true;
-          arrayItem.title = title;
-          arrayItem.status = progress;
-          arrayItem.task = task;
-        }
-      });
-      if (!f) {
-        setTaskList([
-          ...taskList,
-          { id: ++id_count, title: title, task: task, status: progress }
-        ]);
+  
+  const resetFields = () => {
+    setCurrentTask(taskInit)
+    setCurrentID(-1);
+  }
+
+  const appendTask = () => {
+    currentTask.id = id_count.current++;
+    setTaskList([...taskList, currentTask]);
+    resetFields();
+  }
+
+  const updateTask = () => {
+    taskList.forEach(function (listItem) {
+      if (listItem.id === currentID) {
+        listItem.title = currentTask.title;
+        listItem.status = currentTask.status;
+        listItem.task = currentTask.task;
       }
-    }
+    });
+  }
+
+  const handleMutation = () => {
+    if (taskList.length === 0) {
+      appendTask();
+    } else if (currentID!==-1){
+      updateTask();
+    } else {
+       appendTask();
+      }
+    resetFields();
   };
 
   const handleDelete = () => {
-    console.log(currentID);
-    setTitle("");
-    setTask("");
     setTaskList((current) =>
       current.filter((t) => t.id !== currentID)
     );
+    resetFields();
   }
+
   return (
     <>
       <div className="taskForm">
         <input
           placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={currentTask.title}
+          onChange={(e) => setCurrentTask(prevTask => {return { ...prevTask, title: e.target.value }})}
         />
-        <br />
+        
         <input
           placeholder="Description"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
+          value={currentTask.task}
+          onChange={(e) => setCurrentTask(prevTask => {return { ...prevTask,task: e.target.value }})}
         />
-        <br />
-        
-        <select value={progress} onChange={(e) => setProgress(e.target.value)}>
+        <select value={currentTask.status} onChange={(e) => setCurrentTask( prevTask => {return {...prevTask,status:e.target.value}})}>
           <option>{Status.TODO}</option>
           <option>{Status.DOING}</option>
           <option>{Status.DONE}</option>
         </select>
         <br />
-        <button onClick={handleClick} className="addButton">Add/Update</button>
+        <button onClick={handleMutation} className="addButton">Add/Update</button>
         <button onClick={handleDelete} className="deleteButton">Delete</button>
       </div>
-      <TaskList tasks={taskList} grabTitle={setTitle} grabTask={setTask} grabID={setCurrentID}/>
+      <TaskList tasks={taskList} grabTask={setCurrentTask} grabID={setCurrentID}/>
     </>
   );
 }
