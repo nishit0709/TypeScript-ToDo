@@ -71,11 +71,12 @@ const TodoItemContainer = styled.li`
   writing-mode: horizontal-tb;
 `;
 
+
 const TodoList: React.FC = () => {
   const [todoItems, setTodoItems] = useState<TodoItem[]>([]);
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [status, setStatus] = useState<Status | any>(Status.TODO);
+  const [status, setStatus] = useState<Status>(Status.TODO);
   const [editItemId, setEditItemId] = useState<string | null>(null);
 
   const handleAddTodo = () => {
@@ -150,7 +151,7 @@ const TodoList: React.FC = () => {
               <select
                 id="status"
                 value={status}
-                onChange={(e) => setStatus(e.target.value)}
+                onChange={(e) => setStatus(e.target.value as Status)}
               >
                 <option value={Status.TODO}>Todo</option>
                 <option value={Status.DOING}>Doing</option>
@@ -188,7 +189,7 @@ const TodoList: React.FC = () => {
         <div>
           <ul>
             {todoItems.map((todo) => (
-              <>
+              <React.Fragment key={todo.id}>
                 <Card
                   id={todo.id}
                   name={todo.name}
@@ -203,7 +204,7 @@ const TodoList: React.FC = () => {
                     Delete
                   </DeleteButton>
                 </div>
-              </>
+              </React.Fragment>
             ))}
           </ul>
         </div>
